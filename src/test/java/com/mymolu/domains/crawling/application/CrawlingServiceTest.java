@@ -7,7 +7,9 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -19,14 +21,12 @@ class CrawlingServiceTest {
     @Autowired
     private CrawlingService crawlingService;
 
-        @DisplayName("픽시브 이미지 크롤링 테스트")
+        @DisplayName("픽시브 이미지를 크롤링하면 60장의 이미지 url을 긁어온다.")
             @Test
             void CrawlingServiceTest() throws InterruptedException {
-                // given
-                crawlingService.getImages();
-                // when
-
-                // then
-
+            // given
+            List<String> result = crawlingService.getImages();
+            // expected
+            assertThat(result.size()).isEqualTo(60);
             }
 }
