@@ -20,7 +20,7 @@ class CrawlingServiceTest {
     @Test
     void CrawlingServiceTest() throws InterruptedException {
         // given
-        List<String> result = crawlingService.getImages();
+        List<String> result = crawlingService.downloadImages();
         // expected
         assertThat(result.size()).isEqualTo(60);
     }
