@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -40,12 +41,16 @@ public class CrawlingService {
         List<String> images = imageBox.stream()
                 .map(o -> o.findElement(By.cssSelector("img.sc-rp5asc-10.erYaF")).getAttribute("src"))
                 .collect(Collectors.toList());
+        List<String> imageNames = new ArrayList<>();
         for (String imgUrl : images) {
-            downloadImageWithReferer(imgUrl, "download/" + imgUrl.substring(imgUrl.lastIndexOf('/') + 1));
+            String downloadPath = "src/main/resources/static/download/";
+            String fileName = imgUrl.substring(imgUrl.lastIndexOf('/') + 1);
+            downloadImageWithReferer(imgUrl, downloadPath + fileName);
+            imageNames.add(fileName);
         }
 
         driver.quit();
-        return images;
+        return imageNames;
     }
 
     private static void downloadImageWithReferer(String imageUrl, String destinationFile) {
@@ -56,7 +61,7 @@ public class CrawlingService {
             // Referer 헤더 설정
             connection.setRequestProperty("Referer", "https://www.pixiv.net/");
 
-            File folder = new File("download");
+            File folder = new File("src/main/resources/static/download/");
             if (!folder.exists()) {
                 folder.mkdir();
             }
