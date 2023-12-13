@@ -9,5 +9,4 @@ public class MyMoluApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(MyMoluApplication.class, args);
 	}
-
 }
