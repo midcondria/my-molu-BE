@@ -14,7 +14,7 @@ public class StudentController {
     private final CrawlingService crawlingService;
 
     @GetMapping("/students")
-    public List<String> getStudents() throws InterruptedException {
+    public List<String> getStudents() {
         return crawlingService.downloadImages();
     }
 }

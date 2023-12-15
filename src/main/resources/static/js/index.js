@@ -5,24 +5,22 @@ const input = document.querySelector('#input');
 const school = document.querySelector('#school');
 
 const schoolList = ["Trinity", "Millennium", "Gehenna" , "Abydos"];
-let bindedData;
-
+let URL = "http://localhost:8080/students";
 function getStudent() {
 
-    fetch("http://localhost:8080/students", {
+    fetch(URL, {
         header: 'Access-Control-Allow-Origin',
         mode: 'no-cors',
         method: 'GET',
     })
         .then((response) => response.json())
         .then((data) => {
-            bindedData = data;
             imageArea.innerHTML = '';
-            for (let i = 0; i < 10; i++) {
+            for (let i = 0; i < 20; i++) {
                 if (data[i]) {
                     const student = document.createElement('div');
                     const image = document.createElement('img');
-                    image.setAttribute('src', "./download/" + data[i]);
+                    image.setAttribute('src', data[i]);
                     console.log(data[i]);
                     student.append(image);
                     imageArea.append(student);
