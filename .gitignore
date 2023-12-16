@@ -8,8 +8,6 @@ build/
 ### custom ###
 *.yml
 /driver/
-SeleniumConfig.java
-
 
 ### STS ###
 .apt_generated
