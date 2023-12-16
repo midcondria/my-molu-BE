@@ -19,18 +19,19 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
-@RequiredArgsConstructor
 @Service
+@RequiredArgsConstructor
 public class CrawlingService {
+
+    private final SeleniumConfig seleniumConfig;
 
     // 짤 크롤링
     private static final String URL_ILLUSTRATION = "https://www.pixiv.net/tags/%E3%83%96%E3%83%AB%E3%83%BC%E3%82%A2%E3%83%BC%E3%82%AB%E3%82%A4%E3%83%96/illustrations";
     private static final String IMAGE_BOX_ILLUSTRATION = "#root > div.charcoal-token > div > div:nth-child(4) > div > div > div.sc-15n9ncy-0.jORshO > section > div.sc-l7cibp-0.juyBTC > div:nth-child(1) > ul > li";
     public static final String DOWNLOAD_DIRECTORY = "download/";
 
-
     public List<String> downloadImages() {
-        ChromeDriver driver = SeleniumConfig.chromeDriver();
+        ChromeDriver driver = seleniumConfig.chromeDriver();
         driver.get(URL_ILLUSTRATION);
 
         autoScroll(driver);
